@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Two Sum",
+    "prompt": "Return indices of two numbers that add up to target. Prefer O(n) with unordered_map.",
+    "starter": "vector<int> twoSum(vector<int>& nums, int target) {\n    // your code\n}",
+    "solution": "vector<int> twoSum(vector<int>& nums, int target) {\n    unordered_map<int, int> seen;\n    for (int i = 0; i < (int)nums.size(); i++) {\n        int need = target - nums[i];\n        if (seen.count(need)) return {seen[need], i};\n        seen[nums[i]] = i;\n    }\n    return {};\n}",
+    "explanation": "Hash value→index; look up complement each step."
+  },
+  {
+    "title": "Valid Anagram",
+    "prompt": "Return true if t is an anagram of s (lowercase a-z).",
+    "starter": "bool isAnagram(string s, string t) {\n    // your code\n}",
+    "solution": "bool isAnagram(string s, string t) {\n    if (s.size() != t.size()) return false;\n    int count[26] = {0};\n    for (int i = 0; i < (int)s.size(); i++) {\n        count[s[i] - 'a']++;\n        count[t[i] - 'a']--;\n    }\n    for (int c : count) if (c) return false;\n    return true;\n}",
+    "explanation": "Frequency array of 26 letters; all zeros means anagram."
+  },
+  {
+    "title": "FizzBuzz",
+    "prompt": "Return vector<string> for 1..n with Fizz/Buzz/FizzBuzz rules.",
+    "starter": "vector<string> fizzBuzz(int n) {\n    // your code\n}",
+    "solution": "vector<string> fizzBuzz(int n) {\n    vector<string> out;\n    for (int i = 1; i <= n; i++) {\n        if (i % 15 == 0) out.push_back(\"FizzBuzz\");\n        else if (i % 3 == 0) out.push_back(\"Fizz\");\n        else if (i % 5 == 0) out.push_back(\"Buzz\");\n        else out.push_back(to_string(i));\n    }\n    return out;\n}",
+    "explanation": "Need <string> for to_string; check 15 first."
+  },
+  {
+    "title": "Max Subarray (Kadane)",
+    "prompt": "Largest contiguous subarray sum.",
+    "starter": "int maxSubArray(vector<int>& nums) {\n    // your code\n}",
+    "solution": "int maxSubArray(vector<int>& nums) {\n    int best = nums[0], cur = nums[0];\n    for (size_t i = 1; i < nums.size(); i++) {\n        cur = max(nums[i], cur + nums[i]);\n        best = max(best, cur);\n    }\n    return best;\n}",
+    "explanation": "Standard Kadane; include <algorithm> for max."
+  },
+  {
+    "title": "Reverse Words",
+    "prompt": "Reverse word order; collapse spaces.",
+    "starter": "string reverseWords(string s) {\n    // your code\n}",
+    "solution": "string reverseWords(string s) {\n    stringstream ss(s);\n    string word;\n    vector<string> words;\n    while (ss >> word) words.push_back(word);\n    reverse(words.begin(), words.end());\n    string out;\n    for (size_t i = 0; i < words.size(); i++) {\n        if (i) out += ' ';\n        out += words[i];\n    }\n    return out;\n}",
+    "explanation": "stringstream >> skips whitespace; reverse the vector; join."
+  }
+]

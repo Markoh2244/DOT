@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Two Sum",
+    "prompt": "Return indices of two numbers that add up to target. Prefer O(n) with HashMap.",
+    "starter": "public int[] twoSum(int[] nums, int target) {\n    // your code\n}",
+    "solution": "public int[] twoSum(int[] nums, int target) {\n    Map<Integer, Integer> seen = new HashMap<>();\n    for (int i = 0; i < nums.length; i++) {\n        int need = target - nums[i];\n        if (seen.containsKey(need)) return new int[]{seen.get(need), i};\n        seen.put(nums[i], i);\n    }\n    return new int[]{};\n}",
+    "explanation": "HashMap value→index; check complement before inserting."
+  },
+  {
+    "title": "Valid Anagram",
+    "prompt": "Return true if t is an anagram of s.",
+    "starter": "public boolean isAnagram(String s, String t) {\n    // your code\n}",
+    "solution": "public boolean isAnagram(String s, String t) {\n    if (s.length() != t.length()) return false;\n    int[] count = new int[26];\n    for (int i = 0; i < s.length(); i++) {\n        count[s.charAt(i) - 'a']++;\n        count[t.charAt(i) - 'a']--;\n    }\n    for (int c : count) if (c != 0) return false;\n    return true;\n}",
+    "explanation": "For lowercase letters, a size-26 array is enough. Or two HashMaps."
+  },
+  {
+    "title": "FizzBuzz",
+    "prompt": "Return List<String> for 1..n with Fizz/Buzz/FizzBuzz rules.",
+    "starter": "public List<String> fizzBuzz(int n) {\n    // your code\n}",
+    "solution": "public List<String> fizzBuzz(int n) {\n    List<String> out = new ArrayList<>();\n    for (int i = 1; i <= n; i++) {\n        if (i % 15 == 0) out.add(\"FizzBuzz\");\n        else if (i % 3 == 0) out.add(\"Fizz\");\n        else if (i % 5 == 0) out.add(\"Buzz\");\n        else out.add(String.valueOf(i));\n    }\n    return out;\n}",
+    "explanation": "Check %15 before %3 and %5."
+  },
+  {
+    "title": "Max Subarray (Kadane)",
+    "prompt": "Largest contiguous subarray sum.",
+    "starter": "public int maxSubArray(int[] nums) {\n    // your code\n}",
+    "solution": "public int maxSubArray(int[] nums) {\n    int best = nums[0], cur = nums[0];\n    for (int i = 1; i < nums.length; i++) {\n        cur = Math.max(nums[i], cur + nums[i]);\n        best = Math.max(best, cur);\n    }\n    return best;\n}",
+    "explanation": "Kadane's algorithm in one pass."
+  },
+  {
+    "title": "Reverse Words",
+    "prompt": "Reverse word order; trim/collapse spaces.",
+    "starter": "public String reverseWords(String s) {\n    // your code\n}",
+    "solution": "public String reverseWords(String s) {\n    String[] parts = s.trim().split(\"\\\\s+\");\n    Collections.reverse(Arrays.asList(parts));\n    return String.join(\" \", parts);\n}",
+    "explanation": "trim, split on whitespace, reverse list view, join."
+  }
+]
